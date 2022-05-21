@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.fjnu501.securities.mapper.AccountMapper">
+
+    <resultMap id="adminUserMap" type="user">
+        <result column="admin_name" property="username"/>
+        <result column="admin_pwd" property="password"/>
+    </resultMap>
+
+    <resultMap id="clientUserMap" type="user">
+        <result column="username" property="username"/>
+        <result column="userpwd" property="password"/>
+    </resultMap>
+
+    <select id="getAdminByUsername" parameterType="string" resultMap="clientUserMap">
+        select username, userpwd from client
+    </select>
+
+    <select id="getClientByUsername" parameterType="string" resultMap="adminUserMap">
+        select admin_name, admin_pwd from admin
+    </select>
+
+    <select id="getMaxClientId" resultType="int">
+        select max(uid) from client
+    </select>
+
+    <insert id="registerClient" parameterType="client">
+        insert into client values (#{uid}, #{clientName}, #{clientEmail}, #{clientAddr}, #{clientTelephone}, #{username}, #{password} ,#{idNumber})
+    </insert>
+
+    <select id="getAllClientIdNumber" resultType="string">
+        select id_number from client
+    </select>
+
+</mapper>
