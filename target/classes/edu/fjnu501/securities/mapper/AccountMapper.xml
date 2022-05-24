@@ -6,33 +6,33 @@
 <mapper namespace="edu.fjnu501.securities.mapper.AccountMapper">
 
     <resultMap id="adminUserMap" type="user">
-        <result column="admin_name" property="username"/>
-        <result column="admin_pwd" property="password"/>
+        <result column="account" property="username"/>
+        <result column="password" property="password"/>
     </resultMap>
 
     <resultMap id="clientUserMap" type="user">
-        <result column="username" property="username"/>
-        <result column="userpwd" property="password"/>
+        <result column="stockholder_account" property="username"/>
+        <result column="stockholder_password" property="password"/>
     </resultMap>
 
-    <select id="getAdminByUsername" parameterType="string" resultMap="clientUserMap">
-        select username, userpwd from client
+    <select id="getClientByUsername" parameterType="string" resultMap="clientUserMap">
+        select stockholder_account, stockholder_password from stockholder where stockholder_account = #{username}
     </select>
 
-    <select id="getClientByUsername" parameterType="string" resultMap="adminUserMap">
-        select admin_name, admin_pwd from admin
+    <select id="getAdminByUsername" parameterType="string" resultMap="adminUserMap">
+        select account, password from register
     </select>
 
     <select id="getMaxClientId" resultType="int">
-        select max(uid) from client
+        select max(stockholder_id) from stockholder
     </select>
 
     <insert id="registerClient" parameterType="client">
-        insert into client values (#{uid}, #{clientName}, #{clientEmail}, #{clientAddr}, #{clientTelephone}, #{username}, #{password} ,#{idNumber})
+        insert into stockholder values (#{uid}, #{username}, #{password}, #{idNumber}, #{clientTelephone}, #{asset})
     </insert>
 
     <select id="getAllClientIdNumber" resultType="string">
-        select id_number from client
+        select stockholder_card from stockholder
     </select>
 
 </mapper>

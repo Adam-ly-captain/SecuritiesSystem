@@ -1,6 +1,7 @@
 package edu.fjnu501.securities.shiro;
 
 
+import edu.fjnu501.securities.domain.User;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -31,7 +32,8 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws ExcessiveAttemptsException {
-        String username = (String)token.getPrincipal();
+        User principal = (User) token.getPrincipal();
+        String username = principal.getUsername();
         Integer retryCount = cache.get(username);
         if(retryCount == null) {
             retryCount = new Integer(0);

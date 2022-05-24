@@ -4,10 +4,17 @@ public class Client extends User{
 
     private int uid;
     private String clientName;
-    private String clientEmail;
-    private String clientAddr;
     private String clientTelephone;
     private String idNumber;
+    private double asset;
+
+    public double getAsset() {
+        return asset;
+    }
+
+    public void setAsset(double asset) {
+        this.asset = asset;
+    }
 
     public int getUid() {
         return uid;
@@ -25,22 +32,6 @@ public class Client extends User{
         this.clientName = clientName;
     }
 
-    public String getClientEmail() {
-        return clientEmail;
-    }
-
-    public void setClientEmail(String clientEmail) {
-        this.clientEmail = clientEmail;
-    }
-
-    public String getClientAddr() {
-        return clientAddr;
-    }
-
-    public void setClientAddr(String clientAddr) {
-        this.clientAddr = clientAddr;
-    }
-
     public String getClientTelephone() {
         return clientTelephone;
     }
@@ -55,18 +46,6 @@ public class Client extends User{
 
     public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
-    }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "uid=" + uid +
-                ", clientName='" + clientName + '\'' +
-                ", clientEmail='" + clientEmail + '\'' +
-                ", clientAddr='" + clientAddr + '\'' +
-                ", clientTelephone='" + clientTelephone + '\'' +
-                ", idNumber='" + idNumber + '\'' +
-                '}';
     }
 
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.fjnu501.securities.mapper.StockMapper">
+
+    <resultMap id="stockMap" type="stock">
+        <id column="company_id" property="companyId"/>
+        <result column="company_stock_perprice" property="stockPerPrice"/>
+        <result column="company_asset" property="asset"/>
+        <result column="company_stock_num" property="stockNum"/>
+        <result column="company_name" property="companyName"/>
+        <result column="stock_name" property="stockName"/>
+    </resultMap>
+
+    <select id="getAllStockInfo" resultMap="stockMap">
+        select * from company
+    </select>
+
+    <resultMap id="stockSumMap" type="stockHolder">
+        <id column="id" property="id"/>
+        <result column="sid" property="sid"/>
+        <result column="cid" property="cid"/>
+        <result column="stock_sum" property="stockSum"/>
+    </resultMap>
+
+    <select id="getStockSumByUid" parameterType="int" resultMap="stockSumMap">
+        select * from stocksum where sid = #{uid}
+    </select>
+
+</mapper>

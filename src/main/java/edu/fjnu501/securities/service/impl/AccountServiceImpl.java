@@ -1,8 +1,9 @@
-package edu.fjnu501.securities.service;
+package edu.fjnu501.securities.service.impl;
 
 import edu.fjnu501.securities.domain.Client;
 import edu.fjnu501.securities.domain.User;
 import edu.fjnu501.securities.mapper.AccountMapper;
+import edu.fjnu501.securities.service.AccountService;
 import edu.fjnu501.securities.state.UserType;
 import edu.fjnu501.securities.utils.MD5Password;
 import edu.fjnu501.securities.utils.RandomUsername;
@@ -17,12 +18,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public User getUserByUsername(String username, String type) {
+        User user = null;
         if (UserType.Admin.getType().equals(type)) {
-            accountMapper.getAdminByUsername(username);
+            user = accountMapper.getAdminByUsername(username);
         } else {
-            accountMapper.getClientByUsername(username);
+            user = accountMapper.getClientByUsername(username);
         }
-        return null;
+        return user;
     }
 
     @Override
