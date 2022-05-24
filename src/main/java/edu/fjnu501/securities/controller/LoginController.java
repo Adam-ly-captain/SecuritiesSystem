@@ -39,4 +39,10 @@ public class LoginController {
         return new Result(ResultCodeState.SUCCESS.getState(), "登录成功", null);
     }
 
+    @RequestMapping(value = "/unlogin")
+    @ResponseBody
+    public Result unLogin() {
+        return new Result(ResultCodeState.UNLOGIN.getState(), "请先登录", null);
+    }
+
 }
