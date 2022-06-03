@@ -1,52 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="edu.fjnu501.securities.mapper.CompanyMapper">
-    <!--    private int companyId;-->
-    <!--    private String companyName;-->
-    <!--    private int companyStockId;-->
-    <!--    private String stockName;-->
-    <!--    private double companyStockPerprice;-->
-    <!--    private double companyAsset;-->
-    <!--    private int companyStockNum;-->
+
     <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
     <insert id="insertCompany">
-        insert into company(company_id,company_stock_id,company_stock_perprice,company_asset,
-                            company_stock_num,company_name,stock_name) values(#{companyId},#{companyStockId},
-                                                                              #{companyStockPerprice},#{companyAsset},#{companyStockNum},#{companyName},#{stockName})
+        insert into company(company_stock_perprice, company_asset, company_stock_num, company_name, stock_name, stock_all) values(#{stockPerPrice}, #{asset}, #{stockNum}, #{companyName}, #{stockName}, #{stockAll})
     </insert>
-    <update id="updateCompany">
-        update company set company_asset=#{companyAsset} where company_id=#{companyId}
+
+    <update id="updateAsset">
+        update company set company_asset=#{asset} where company_id=#{companyId}
     </update>
+
     <delete id="deleteCompany">
         delete from company where company_id= #{companyId}
     </delete>
-    <resultMap id="companyMap" type="company">
-        <result column="company_id" property="companyId"/>
+
+    <resultMap id="companyMap" type="stock">
+        <id column="company_id" property="companyId"/>
         <result column="company_name" property="companyName"/>
         <result column="stock_name" property="stockName"/>
-        <result column="company_stock_perprice" property="companyStockPerprice"/>
-        <result column="company_asset" property="companyAsset"/>
-        <result column="company_stock_num" property="companyStockNum"/>
-        <result column="company_stock_id" property="companyStockId"/>
-
+        <result column="company_stock_perprice" property="stockPerPrice"/>
+        <result column="company_asset" property="asset"/>
+        <result column="company_stock_num" property="stockNum"/>
+        <result column="stock_all" property="stockAll"/>
     </resultMap>
-    <select id="queryCompanysByArray"  resultMap="companyMap">
+
+    <select id="getAllCompanies" resultMap="companyMap">
         select * from company
     </select>
 
-    <!--    private int companyId;-->
+    <select id="getCompanyInfoByStockId" parameterType="int" resultMap="companyMap">
+        select * from company where company_id = #{companyId}
+    </select>
 
-    <!--    private String companyName;-->
+    <update id="updatePerPrice">
+        update company set company_stock_perprice = #{price} where company_id = #{companyId}
+    </update>
 
-    <!--    private int companyStockId;-->
+    <update id="updateCompanyBasicInfo" parameterType="stock">
+        update company set company_name = #{companyName}, stock_name = #{stockName} where company_id = #{companyId}
+    </update>
 
-    <!--    private String stockName;-->
-    <!--    //股票单价-->
-    <!--    private double companyStockPerprice;-->
-    <!--    //公司资产-->
-    <!--    private double companyAsset;-->
-    <!--    //公司持有的股票数-->
-    <!--    private int companyStockNum;-->
+    <update id="updateStockAll">
+        update company set stock_all = #{stockAll} where company_id = #{companyId}
+    </update>
 
 </mapper>

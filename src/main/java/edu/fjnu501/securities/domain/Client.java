@@ -7,6 +7,25 @@ public class Client extends User{
     private String clientTelephone;
     private String idNumber;
     private double asset;
+    private String bankAccount;
+
+    private double addedMoney;
+
+    public double getAddedMoney() {
+        return addedMoney;
+    }
+
+    public void setAddedMoney(double addedMoney) {
+        this.addedMoney = addedMoney;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
 
     public double getAsset() {
         return asset;

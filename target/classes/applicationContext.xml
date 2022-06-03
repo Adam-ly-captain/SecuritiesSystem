@@ -44,7 +44,7 @@
         </tx:attributes>
     </tx:advice>
 
-    <aop:config>
+    <aop:config proxy-target-class="true">
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* edu.fjnu501.securities.service.impl.*.*(..))"/>
     </aop:config>
 
@@ -78,11 +78,11 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager" />
         <!-- 身份认证失败，则跳转到登录页面的配置 -->
-        <property name="loginUrl" value="/account/unlogin" />
+        <property name="loginUrl" value="/unlogin" />
         <!-- 登录成功后的页面 -->
         <!--        <property name="successUrl" value="/admin/index" />-->
         <!-- 权限认证失败，则跳转到指定页面 -->
-        <!--        <property name="unauthorizedUrl"  value="/unauthorized" />  &lt;!&ndash; 登录后访问没有权限的页面后跳转的页面 &ndash;&gt;-->
+        <property name="unauthorizedUrl"  value="/user/unauthorized" />  <!-- 登录后访问没有权限的页面后跳转的页面 -->
         <!-- Shiro连接约束配置,即过滤链的定义 -->
 
 
@@ -90,9 +90,11 @@
             <value>
                 <!-- 注意：规则是有顺序的，从上到下，拦截范围必须是从小到大的 -->
                 <!--  url = 拦截规则（anon为匿名，authc为要登录后，才能访问，logout登出过滤） -->
-                /account/login = anon
-                /account/register = anon
-                /**= anon
+                /login = anon
+                /register = anon
+                /company/** = roles[admin]
+<!--                /**= authc-->
+                /**= authc
                 <!--                /**= authc-->
             </value>
         </property>
@@ -102,5 +104,10 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <bean id="taskQueueSchedule" class="edu.fjnu501.securities.rpc.TaskQueueSchedule">
+        <property name="tradeServiceImpl" ref="tradeService2"/>
+    </bean>
+
+    <bean id="tradeService2" class="edu.fjnu501.securities.service.impl.TradeServiceImpl"/>
 
 </beans>

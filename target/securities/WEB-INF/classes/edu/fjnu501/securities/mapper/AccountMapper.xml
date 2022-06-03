@@ -28,11 +28,28 @@
     </select>
 
     <insert id="registerClient" parameterType="client">
-        insert into stockholder values (#{uid}, #{username}, #{password}, #{idNumber}, #{clientTelephone}, #{asset})
+        insert into stockholder values (#{uid}, #{username}, #{password}, #{idNumber}, #{clientTelephone}, #{asset}, #{bankAccount})
     </insert>
 
     <select id="getAllClientIdNumber" resultType="string">
         select stockholder_card from stockholder
+    </select>
+
+    <update id="bindBankAccount">
+        update stockholder set bank_account = #{username} where stockholder_id = #{stockHolderId}
+    </update>
+
+    <resultMap id="clientMap" type="client">
+        <id column="stockholder_id" property="uid"/>
+        <result column="stockholder_account" property="username"/>
+        <result column="stockholder_card" property="idNumber"/>
+        <result column="stockholder_tel" property="clientTelephone"/>
+        <result column="account_asset" property="asset"/>
+        <result column="bank_account" property="bankAccount"/>
+    </resultMap>
+
+    <select id="getStockHolderInfoByUid" parameterType="int" resultMap="clientMap">
+        select * from stockholder where stockholder_id = #{uid}
     </select>
 
 </mapper>

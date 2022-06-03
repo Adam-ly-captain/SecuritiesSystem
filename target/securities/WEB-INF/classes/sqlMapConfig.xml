@@ -7,6 +7,7 @@
 
     <typeAliases>
         <package name="edu.fjnu501.securities.domain"/>
+        <package name="edu.fjnu501.rpc.domain"/>
     </typeAliases>
 
     <plugins>

@@ -1,21 +1,28 @@
 package edu.fjnu501.securities.service;
 
 
-import edu.fjnu501.securities.domain.Company;
+import edu.fjnu501.securities.domain.Page;
+import edu.fjnu501.securities.domain.Stock;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Mapper
-@Repository
 public interface CompanyService {
 
-    int addCompany(Company company);
+    void addCompany(Stock stock);
 
-    boolean deleteCompany(int Companyid);
+    boolean deleteCompany(int companyId);
 
-    List<Company> queryCompanysByArray(int currPage, int pageSize);
+    void getAllCompaniesByPage(Page page);
 
-    void updateCompany(int id,double amount);
+    void updateAsset(double asset, int companyId);
+
+    void updatePerPrice(double price, int companyId);
+
+    void updateCompanyBasicInfo(Stock stock);
+
+    void updateStockAll(int stockAll, int companyId);
+
+    Stock getCompanyInfoByStockId(int companyId);
 
 }

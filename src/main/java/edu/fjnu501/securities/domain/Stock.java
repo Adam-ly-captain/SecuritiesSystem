@@ -8,6 +8,7 @@ public class Stock {
     private int stockNum;
     private String companyName;
     private String stockName;
+    private int stockAll;
 
     @Override
     public String toString() {
@@ -18,7 +19,16 @@ public class Stock {
                 ", stockNum=" + stockNum +
                 ", companyName='" + companyName + '\'' +
                 ", stockName='" + stockName + '\'' +
+                ", stockAll=" + stockAll +
                 '}';
+    }
+
+    public int getStockAll() {
+        return stockAll;
+    }
+
+    public void setStockAll(int stockAll) {
+        this.stockAll = stockAll;
     }
 
     public int getCompanyId() {

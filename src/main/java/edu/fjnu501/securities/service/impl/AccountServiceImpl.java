@@ -19,7 +19,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public User getUserByUsername(String username, String type) {
         User user = null;
-        if (UserType.Admin.getType().equals(type)) {
+        if (UserType.Admin.getType().equals(type)) { // 默认是普通用户
             user = accountMapper.getAdminByUsername(username);
         } else {
             user = accountMapper.getClientByUsername(username);
@@ -44,6 +44,16 @@ public class AccountServiceImpl implements AccountService {
         accountMapper.registerClient(client);
 
         return randomUserName;
+    }
+
+    @Override
+    public void bindBankAccount(String username, int stockHolderId) {
+        accountMapper.bindBankAccount(username, stockHolderId);
+    }
+
+    @Override
+    public Client getStockHolderInfoByUid(int uid) {
+        return accountMapper.getStockHolderInfoByUid(uid);
     }
 
     private boolean checkIdNumber(String id) {

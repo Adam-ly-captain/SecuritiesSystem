@@ -9,4 +9,8 @@ public interface AccountService {
 
     String registerClient(Client client);
 
+    void bindBankAccount(String username, int stockHolderId);
+
+    Client getStockHolderInfoByUid(int uid);
+
 }

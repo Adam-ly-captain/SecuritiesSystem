@@ -26,6 +26,16 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+<!--  <servlet>-->
+<!--    <servlet-name>TaskQueueSchedule</servlet-name>-->
+<!--    <servlet-class>edu.fjnu501.securities.rpc.TaskQueueSchedule</servlet-class>-->
+<!--    <load-on-startup>5</load-on-startup>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>TaskQueueSchedule</servlet-name>-->
+<!--    <url-pattern>/task</url-pattern>-->
+<!--  </servlet-mapping>-->
+
 
   <!-- 配置 shiro 拦截器  -->
   <filter>

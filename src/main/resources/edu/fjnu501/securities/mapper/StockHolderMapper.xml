@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.fjnu501.securities.mapper.StockHolderMapper">
+
+    <update id="updateAsset">
+        update stockholder set account_asset = #{asset} where stockholder_id = #{stockHolderId}
+    </update>
+
+    <update id="updateStockSum">
+        update stocksum set stock_sum = stock_sum + #{stockSum} where cid = #{companyId} and sid = #{stockHolderId}
+    </update>
+
+</mapper>

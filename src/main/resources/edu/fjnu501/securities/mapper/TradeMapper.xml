@@ -19,4 +19,44 @@
         select * from trade where trade_stockholder_id = #{uid}
     </select>
 
+    <resultMap id="stockSumMap" type="trade">
+        <id column="id" property="tradeId"/>
+        <result column="cid" property="stockId"/>
+        <result column="sid" property="stockHolderId"/>
+        <result column="stock_sum" property="stockNum"/>
+    </resultMap>
+
+    <select id="getStockSumByCompanyIdAndStockHolderId" resultMap="stockSumMap">
+        select * from stocksum where sid = #{stockHolderId} and cid = #{companyId}
+    </select>
+
+    <insert id="addStockSumInfo" parameterType="trade">
+        insert into stocksum (sid, cid, stock_sum) values (#{stockHolderId}, #{stockId}, #{stockNum})
+    </insert>
+
+    <insert id="setTradeInfo" parameterType="trade">
+        insert into trade (trade_stockholder_id, trade_company_id, trade_type, stock_num, sum_money, current_perprice) values (#{stockHolderId}, #{stockId}, #{tradeType}, #{stockNum}, #{sumMoney}, #{currentPerPrice})
+    </insert>
+
+    <resultMap id="bankTradeMap" type="bankTrade">
+        <id column="id" property="tradeId"/>
+        <result column="card_id" property="bankCardId"/>
+        <result column="sid" property="stockHolderId"/>
+        <result column="amount" property="addedMoney"/>
+        <result column="state" property="state"/>
+        <result column="type" property="type"/>
+    </resultMap>
+
+    <select id="getLimitedBankTrade" parameterType="int" resultMap="bankTradeMap">
+        select * from bank_trade where state = 0 limit #{amount}
+    </select>
+
+    <update id="updateBankTradeState">
+        update bank_trade set state = #{state} where id = #{orderId}
+    </update>
+
+    <insert id="addBankCardTradeInfo" parameterType="bankTrade">
+        insert into bank_trade values (#{tradeId}, #{bankCardId}, #{stockHolderId}, #{state}, #{addedMoney}, #{type})
+    </insert>
+
 </mapper>

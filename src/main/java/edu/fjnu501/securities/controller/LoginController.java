@@ -2,6 +2,7 @@ package edu.fjnu501.securities.controller;
 
 import edu.fjnu501.securities.domain.Result;
 import edu.fjnu501.securities.domain.User;
+import edu.fjnu501.securities.service.AccountService;
 import edu.fjnu501.securities.shiro.UserToken;
 import edu.fjnu501.securities.state.ResultCodeState;
 import org.apache.shiro.SecurityUtils;
@@ -10,6 +11,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,5 +46,6 @@ public class LoginController {
     public Result unLogin() {
         return new Result(ResultCodeState.UNLOGIN.getState(), "请先登录", null);
     }
+
 
 }

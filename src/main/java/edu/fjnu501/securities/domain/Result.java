@@ -1,14 +1,24 @@
 package edu.fjnu501.securities.domain;
 
-public class Result {
+import org.apache.hadoop.io.Writable;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
+
+public class Result implements Writable {
 
     private int code;
     private String msg;
     private Object data;
 
-    public Result(int code, String msg, Object data) {
+    public Result(int code, String msg) {
         this.code = code;
         this.msg = msg;
+    }
+
+    public Result(int code, String msg, Object data) {
+        this(code, msg);
         this.data = data;
     }
 
@@ -43,5 +53,17 @@ public class Result {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    @Override
+    public void write(DataOutput out) throws IOException {
+        out.writeInt(code);
+        out.writeUTF(msg);
+    }
+
+    @Override
+    public void readFields(DataInput in) throws IOException {
+        this.code = in.readInt();
+        this.msg = in.readUTF();
     }
 }
