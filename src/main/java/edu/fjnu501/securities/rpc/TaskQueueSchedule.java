@@ -45,7 +45,7 @@ public class TaskQueueSchedule implements RPCProtocol {
       try {
          server = new RPC.Builder(new Configuration())
                  .setBindAddress("localhost")
-                 .setPort(9870)
+                 .setPort(3000)
                  .setProtocol(RPCProtocol.class)
                  .setInstance(new TaskQueueSchedule(1))
                  .build();

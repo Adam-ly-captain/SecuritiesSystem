@@ -52,4 +52,8 @@
         select * from stockholder where stockholder_id = #{uid}
     </select>
 
+    <select id="getUidByUsername" parameterType="string" resultType="int">
+        select stockholder_id from stockholder where stockholder_account = #{username}
+    </select>
+
 </mapper>

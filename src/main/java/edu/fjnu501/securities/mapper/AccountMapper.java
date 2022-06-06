@@ -20,4 +20,6 @@ public interface AccountMapper {
 
     Client getStockHolderInfoByUid(int uid);
 
+    int getUidByUsername(String username);
+
 }

@@ -1,5 +1,6 @@
 package edu.fjnu501.securities.controller;
 
+import edu.fjnu501.securities.domain.Page;
 import edu.fjnu501.securities.domain.Result;
 import edu.fjnu501.securities.domain.Stock;
 import edu.fjnu501.securities.domain.StockHolder;
@@ -39,6 +40,18 @@ public class StockController {
             return new Result(ResultCodeState.FAILED.getState(), "获取失败", null);
         }
         return new Result(ResultCodeState.SUCCESS.getState(), "获取成功", stockSumByUid);
+    }
+
+    @RequestMapping(value = "/get/page")
+    @ResponseBody
+    public Result getStockSumByPage(@RequestBody Page page) {
+        try {
+            stockService.getStockSumByPage(page);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(ResultCodeState.FAILED.getState(), "获取分页数据失败", null);
+        }
+        return new Result(ResultCodeState.SUCCESS.getState(), "获取分页数据成功", page);
     }
 
 }

@@ -5,12 +5,14 @@ import edu.fjnu501.securities.domain.User;
 import edu.fjnu501.securities.service.AccountService;
 import edu.fjnu501.securities.shiro.UserToken;
 import edu.fjnu501.securities.state.ResultCodeState;
+import edu.fjnu501.securities.state.UserType;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class LoginController {
 
+    @Autowired
+    private AccountService accountService;
+
+    private int uid;
+
     @RequestMapping(value = "/login")
     @ResponseBody
     public Result login(@RequestBody User user) {
@@ -29,6 +36,11 @@ public class LoginController {
         UserToken token = new UserToken(user.getUsername(), user.getPassword(), user.getType());
         try {
             subject.login(token);
+            if (UserType.Admin.getType().equals(user.getType())) {
+                uid = 1;
+            } else {
+                uid = accountService.getUidByUsername(user.getUsername());
+            }
         } catch (UnknownAccountException e) {
             return new Result(ResultCodeState.INVALID.getState(), e.getMessage(), null);
         } catch (ExcessiveAttemptsException e) {
@@ -38,7 +50,7 @@ public class LoginController {
         } catch (Exception e) {
             return new Result(ResultCodeState.FAILED.getState(), "登录失败", null);
         }
-        return new Result(ResultCodeState.SUCCESS.getState(), "登录成功", null);
+        return new Result(ResultCodeState.SUCCESS.getState(), "登录成功", uid);
     }
 
     @RequestMapping(value = "/unlogin")

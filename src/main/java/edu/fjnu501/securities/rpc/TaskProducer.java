@@ -101,7 +101,7 @@ public class TaskProducer implements Runnable, RPCProtocol {
 //        System.out.println(bankTrade.getTradeId());
         Configuration configuration = new Configuration();
         configuration.set("ipc.client.rpc-timeout.ms", "1000");
-        RPCProtocol target = RPC.getProxy(RPCProtocol.class, RPCProtocol.versionID, new InetSocketAddress("120.79.139.163", 3101), configuration);
+        RPCProtocol target = RPC.getProxy(RPCProtocol.class, RPCProtocol.versionID, new InetSocketAddress("localhost", 9871), configuration);
         try {
             target.receiveTrade(bankTrade);
         } catch (IOException e) {

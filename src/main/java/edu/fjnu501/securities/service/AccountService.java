@@ -13,4 +13,6 @@ public interface AccountService {
 
     Client getStockHolderInfoByUid(int uid);
 
+    int getUidByUsername(String username);
+
 }

@@ -66,4 +66,8 @@ public class AccountServiceImpl implements AccountService {
         return true;
     }
 
+    public int getUidByUsername(String username) {
+        return accountMapper.getUidByUsername(username);
+    }
+
 }
