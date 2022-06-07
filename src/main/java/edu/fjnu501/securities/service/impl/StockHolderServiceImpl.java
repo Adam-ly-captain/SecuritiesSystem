@@ -22,4 +22,9 @@ public class StockHolderServiceImpl implements StockHolderService {
         stockHolderMapper.updateStockSum(stockSum, companyId, stockHolderId);
     }
 
+    @Override
+    public void deleteStockSumInfo(int stockSumId) {
+        stockHolderMapper.deleteStockSumInfo(stockSumId);
+    }
+
 }

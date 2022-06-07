@@ -13,4 +13,8 @@
         update stocksum set stock_sum = stock_sum + #{stockSum} where cid = #{companyId} and sid = #{stockHolderId}
     </update>
 
+    <delete id="deleteStockSumInfo" parameterType="int">
+        delete from stocksum where id = #{stockSumId}
+    </delete>
+
 </mapper>

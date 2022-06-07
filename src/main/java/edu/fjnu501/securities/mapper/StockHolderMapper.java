@@ -8,4 +8,6 @@ public interface StockHolderMapper {
 
     void updateStockSum(@Param("stockSum") int stockSum, @Param("companyId") int companyId, @Param("stockHolderId") int stockHolderId);
 
+    void deleteStockSumInfo(int stockSumId);
+
 }

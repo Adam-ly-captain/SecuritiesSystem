@@ -6,4 +6,6 @@ public interface StockHolderService {
 
     void updateStockSum(int stockSum, int stockHolderId, int companyId);
 
+    void deleteStockSumInfo(int stockSumId);
+
 }

@@ -99,6 +99,7 @@ public class TradeServiceImpl implements TradeService {
     }
 
     private void updateStockHolderInfo(Trade trade) throws IllegalAccessException {
+        Client stockHolderInfoByUid = accountService.getStockHolderInfoByUid(trade.getStockHolderId());
         if (trade.getTradeType() == TradeType.BUY.getTradeType()) {
             newAsset = - cost;
             newStockAll = trade.getStockNum();
@@ -106,10 +107,13 @@ public class TradeServiceImpl implements TradeService {
             newAsset = cost;
             newStockAll = - trade.getStockNum();
         }
-        stockHolderService.updateAsset(newAsset, trade.getStockHolderId());
+        stockHolderService.updateAsset(newAsset + stockHolderInfoByUid.getAsset(), trade.getStockHolderId());
         if (checkTradeInfo(trade.getStockId(), trade.getStockHolderId())) {  // 检查是否有购买过该股票
             if (trade.getTradeType() == TradeType.SALE.getTradeType() && trade.getStockNum() > sum.getStockNum()) {
                 throw new IllegalAccessException("股数不足");
+            }
+            if (trade.getStockNum() == sum.getStockNum()) {
+                stockHolderService.deleteStockSumInfo(sum.getTradeId());
             }
             stockHolderService.updateStockSum(newStockAll, trade.getStockHolderId(), trade.getStockId());
         } else {
@@ -138,9 +142,9 @@ public class TradeServiceImpl implements TradeService {
     public void addMoneyByBankCard(BankTrade bankTrade) {
         Client stockHolderInfoByUid = accountService.getStockHolderInfoByUid(bankTrade.getStockHolderId());
         if (TradeType.WITHDRAW.getTradeType() == bankTrade.getType()) {  // 取钱
-            newAsset = stockHolderInfoByUid.getAsset() - bankTrade.getAddedMoney();
-        } else if (TradeType.SAVE.getTradeType() == bankTrade.getType()) {  // 存钱
             newAsset = stockHolderInfoByUid.getAsset() + bankTrade.getAddedMoney();
+        } else if (TradeType.SAVE.getTradeType() == bankTrade.getType()) {  // 存钱
+            newAsset = stockHolderInfoByUid.getAsset() - bankTrade.getAddedMoney();
         } else {
             throw new RuntimeException("不存在该操作");
         }

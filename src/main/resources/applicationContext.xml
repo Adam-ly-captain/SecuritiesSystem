@@ -93,8 +93,8 @@
                 /login = anon
                 /register = anon
 <!--                /company/** = roles[admin]-->
-<!--                /**= authc-->
-                /**= anon
+                /**= authc
+<!--                /**= anon-->
                 <!--                /**= authc-->
             </value>
         </property>

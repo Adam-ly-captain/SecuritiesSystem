@@ -32,7 +32,7 @@ public class StockServiceImpl implements StockService {
     public void getStockSumByPage(Page page) {
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         List<StockHolder> stockSumByUid = getStockSumByUid(page.getSid());
-        PageInfo<Stock> pageInfo = new PageInfo<>();
+        PageInfo<StockHolder> pageInfo = new PageInfo<>(stockSumByUid);
         page.setData(stockSumByUid);
         page.setTotalPages(pageInfo.getPages());
     }
