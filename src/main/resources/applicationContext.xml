@@ -92,7 +92,7 @@
                 <!--  url = 拦截规则（anon为匿名，authc为要登录后，才能访问，logout登出过滤） -->
                 /login = anon
                 /register = anon
-<!--                /company/** = roles[admin]-->
+                /company/** = roles[admin]
                 /**= authc
 <!--                /**= anon-->
                 <!--                /**= authc-->
