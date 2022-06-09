@@ -18,10 +18,8 @@
 | /user/get/{uid}                                       | 获取股民基本信息                                             | {uid}代表股民ID                                              | http://localhost:8080/user/get/1 ![image-20220603080147400](https://github.com/Adam-ly-captain/SecuritiesSystem/blob/master/img/image-20220603080147400.png) |
 | /user/bind?username=银行端用户名&stockHolderId=股民ID | 绑定银行账户                                                 | username代表银行系统账号、stockHolderId代表股民ID            | /user/bind?username=root&stockHolderId=1                     |
 | /trade/bank/add                                       | 银行转账                                                     | stockHolderId表示股民ID、bankCardId表示银行卡ID、addedMoney表示此次交易涉及的总金额（绝对值）、type为2代表存钱，type为3代表取钱，state为0表示未完成，为1表示已完成，默认需要传入state:0 | ![image-20220603081220210](https://github.com/Adam-ly-captain/SecuritiesSystem/blob/master/img/image-20220603081220210.png)![image-20220603083001365](https://github.com/Adam-ly-captain/SecuritiesSystem/blob/master/img/image-20220603083001365.png) |
+| /trade/bank/get/page                                  | 获取转账分页交易记录信息                                     | sid代表股民ID，pageNum代表第N页，pageSize代表该页数据量      | ![image-20220610052926391](https://github.com/Adam-ly-captain/SecuritiesSystem/blob/master/img/image-20220610052926391.png) |
 | /trade/bank/update/{orderId}                          | 超时订单重新提交                                             | 如果一个订单处理超时则state为2                               | /trade/bank/update/485                                       |
 | /stock/get/page                                       | 获取用户已购买股票信息的分页数据                             | sid为股民ID，pageSize为每一页的数据量，pageNum为需要返回的指定页数的数据 | ![image-20220606105609859](https://github.com/Adam-ly-captain/SecuritiesSystem/blob/master/img/image-20220606105609859.png) |
-
-
-
-
+| /logout                                               | 注销登录                                                     | 不需要传值                                                   | http://localhost:8080/logout                                 |
 

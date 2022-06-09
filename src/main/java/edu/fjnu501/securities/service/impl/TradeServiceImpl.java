@@ -171,4 +171,18 @@ public class TradeServiceImpl implements TradeService {
         tradeMapper.updateBankTradeState(tradeId, TradeState.UNFINISHED.getState());
     }
 
+    @Override
+    public List<BankTrade> getAllBankTrade(int sid) {
+        return tradeMapper.getAllBankTrade(sid);
+    }
+
+    @Override
+    public void getBankTradesByPage(Page page) {
+        PageHelper.startPage(page.getPageNum(), page.getPageSize());
+        List<BankTrade> allBankTrade = getAllBankTrade(page.getSid());
+        PageInfo<BankTrade> pageInfo = new PageInfo<>(allBankTrade);
+        page.setData(allBankTrade);
+        page.setTotalPages(pageInfo.getPages());
+    }
+
 }

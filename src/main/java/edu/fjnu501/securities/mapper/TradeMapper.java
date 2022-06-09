@@ -23,4 +23,6 @@ public interface TradeMapper {
 
     void addBankCardTradeInfo(BankTrade bankTrade);
 
+    List<BankTrade> getAllBankTrade(int sid);
+
 }

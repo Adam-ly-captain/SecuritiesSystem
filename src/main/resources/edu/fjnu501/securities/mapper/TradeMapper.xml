@@ -51,6 +51,10 @@
         select * from bank_trade where state = 0 limit #{amount}
     </select>
 
+    <select id="getAllBankTrade" parameterType="int" resultMap="bankTradeMap">
+        select * from bank_trade where sid = #{sid}
+    </select>
+
     <update id="updateBankTradeState">
         update bank_trade set state = #{state} where id = #{orderId}
     </update>

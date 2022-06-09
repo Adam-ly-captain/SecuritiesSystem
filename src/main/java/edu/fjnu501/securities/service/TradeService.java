@@ -25,4 +25,8 @@ public interface TradeService {
 
     void updateTimeoutTrade(int tradeId);
 
+    List<BankTrade> getAllBankTrade(int sid);
+
+    void getBankTradesByPage(Page page);
+
 }
